@@ -76,7 +76,7 @@ public class PlayerMover : MonoBehaviour
     }
     private void calculateJump()
     {
-        //if the Transform feetpos is touching something with the "Ground" tag, we set isGround and canJump to true
+        //if the Transform feetpos is touching something with the "Ground" tag, we set isGround to true
         isGrounded = Physics2D.OverlapCircle(feetpos.position, feetRadius, groundChecker);
 
         //if JumpDown is true, then this is the frame that you pressed jump. if isgrounded is true, then you can really jump.
@@ -87,7 +87,7 @@ public class PlayerMover : MonoBehaviour
             jumpTimeCounter = jumpholdtime;
         }
 
-        //if you hold space, you should be able to jump higher. 
+/*        //if you hold space, you should be able to jump higher. 
         if(jumpkey && canJump)
         {
             if(jumpTimeCounter > 0)
@@ -99,12 +99,13 @@ public class PlayerMover : MonoBehaviour
             {
                 canJump = false;
             }
-        }
+        }*/
 
         //if you let go of jump at any point, you can't jump again
         if(JumpUp)
         {
-            canJump = false;
+            //canJump = false;
+            rb.velocity = Vector2.up * -rb.velocity;
         }
 
     }
@@ -112,8 +113,6 @@ public class PlayerMover : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = (new Vector2(horizontalSpeed,rb.velocity.y));
-
-        
     }
 }
 

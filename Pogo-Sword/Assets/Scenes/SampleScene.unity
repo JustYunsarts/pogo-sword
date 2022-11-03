@@ -225,8 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkVelocity: 10
   acceleration: 20
-  deceleration: 15
-  jumpForce: 14
+  deceleration: 10
+  jumpForce: 30
   rb: {fileID: 254986141}
   gator_Collider: {fileID: 254986140}
   feetpos: {fileID: 576801662}
