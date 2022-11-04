@@ -17,6 +17,8 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private Collider2D gator_Collider;
+    [SerializeField]
+    private float downwardForce;
 
     private Vector2 ApplyMove;
     private float horizontalSpeed;
@@ -36,6 +38,7 @@ public class PlayerMover : MonoBehaviour
     private float jumpholdtime;
 
     private float jumpTimeCounter;
+    private float yForce;
 
 
     // Start is called before the first frame update
@@ -82,7 +85,7 @@ public class PlayerMover : MonoBehaviour
         //if JumpDown is true, then this is the frame that you pressed jump. if isgrounded is true, then you can really jump.
         if(JumpDown && isGrounded )
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.AddForce(new Vector2(0,jumpForce));
             canJump = true;
             jumpTimeCounter = jumpholdtime;
         }
@@ -105,14 +108,16 @@ public class PlayerMover : MonoBehaviour
         if(JumpUp)
         {
             //canJump = false;
-            rb.velocity = Vector2.up * -rb.velocity;
+            rb.AddForce(new Vector2(0, downwardForce));
         }
 
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = (new Vector2(horizontalSpeed,rb.velocity.y));
+        Vector2 V = rb.velocity;
+        V.x = horizontalSpeed;
+        rb.velocity = V;
     }
 }
 
