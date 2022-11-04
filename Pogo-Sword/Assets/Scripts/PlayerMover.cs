@@ -1,3 +1,6 @@
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,6 +88,7 @@ public class PlayerMover : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
             canJump = true;
             jumpTimeCounter = jumpholdtime;
+            PlayerStateManager.state = PlayerStateManager.CurrentState.Idle;
         }
 
         //if you hold space, you should be able to jump higher. 
@@ -94,10 +98,13 @@ public class PlayerMover : MonoBehaviour
             {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
+                
+                PlayerStateManager.state = PlayerStateManager.CurrentState.Pogp;
             }
             else
             {
                 canJump = false;
+                PlayerStateManager.state = PlayerStateManager.CurrentState.Jumping;
             }
         }
 
@@ -117,3 +124,6 @@ public class PlayerMover : MonoBehaviour
     }
 }
 
+=======
+>>>>>>> deb9400c1d80c515efdc48a54047d0ac843f0085
+>>>>>>> Stashed changes

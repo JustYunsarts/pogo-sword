@@ -225,10 +225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkVelocity: 10
   acceleration: 20
-  deceleration: 15
-  jumpForce: 14
+  deceleration: 10
+  jumpForce: 6500
   rb: {fileID: 254986141}
   gator_Collider: {fileID: 254986140}
+  downwardForce: -6500
   feetpos: {fileID: 576801662}
   feetRadius: 0.3
   groundChecker:
@@ -276,7 +277,7 @@ Rigidbody2D:
   m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
