@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -123,7 +120,3 @@ public class PlayerMover : MonoBehaviour
         
     }
 }
-
-=======
->>>>>>> deb9400c1d80c515efdc48a54047d0ac843f0085
->>>>>>> Stashed changes
