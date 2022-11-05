@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     public enum CurrentState
     {
         Idle,
-        Pogp,
+        Pogo,
         Jumping
         
 
@@ -18,6 +18,5 @@ public class PlayerStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(state);
     }
 }

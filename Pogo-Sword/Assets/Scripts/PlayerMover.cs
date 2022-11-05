@@ -8,10 +8,6 @@ public class PlayerMover : MonoBehaviour
     [SerializeField]
     private float walkVelocity;
     [SerializeField]
-    private float acceleration;
-    [SerializeField]
-    private float deceleration;
-    [SerializeField]
     private float jumpForce;
     [SerializeField]
     private Rigidbody2D rb;
@@ -23,8 +19,6 @@ public class PlayerMover : MonoBehaviour
 
     private bool JumpDown;
     private bool isGrounded;
-    private bool canJump;
-    private bool jumpkey;
     private bool JumpUp;
 
     [SerializeField]
@@ -33,9 +27,6 @@ public class PlayerMover : MonoBehaviour
     private float feetRadius;
     public LayerMask groundChecker;
     [SerializeField]
-    private float jumpholdtime;
-
-    private float jumpTimeCounter;
 
 
     // Start is called before the first frame update
@@ -47,7 +38,6 @@ public class PlayerMover : MonoBehaviour
     private void Update()
     {
         getMovement();
-        calculateSpeed();
         calculateJump();
     }
 
@@ -56,67 +46,29 @@ public class PlayerMover : MonoBehaviour
         ApplyMove.x = Input.GetAxisRaw("Horizontal");
         JumpDown = Input.GetButtonDown("Jump");
         JumpUp = Input.GetButtonUp("Jump");
-        jumpkey = Input.GetButton("Jump");
     }
 
-    void calculateSpeed()
-    {
-        //logic for whenever you are actually moving
-        if (ApplyMove.x != 0)
-        {
-            horizontalSpeed += ApplyMove.x * acceleration * Time.deltaTime;
-            horizontalSpeed = Mathf.Clamp(horizontalSpeed, -walkVelocity, walkVelocity);
-        }
-
-        //when you are not pressing anything, you wanna decelerate to 0
-        else
-        {
-            horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, 0, deceleration * Time.deltaTime);
-        }
-    }
     private void calculateJump()
     {
         //if the Transform feetpos is touching something with the "Ground" tag, we set isGround and canJump to true
         isGrounded = Physics2D.OverlapCircle(feetpos.position, feetRadius, groundChecker);
 
         //if JumpDown is true, then this is the frame that you pressed jump. if isgrounded is true, then you can really jump.
-        if(JumpDown && isGrounded )
+        if(JumpDown && isGrounded)
         {
-            rb.velocity = Vector2.up * jumpForce;
-            canJump = true;
-            jumpTimeCounter = jumpholdtime;
-            PlayerStateManager.state = PlayerStateManager.CurrentState.Idle;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        //if you hold space, you should be able to jump higher. 
-        if(jumpkey && canJump)
+        if(JumpUp && rb.velocity.y > 0f)
         {
-            if(jumpTimeCounter > 0)
-            {
-                rb.velocity = Vector2.up * jumpForce;
-                jumpTimeCounter -= Time.deltaTime;
-                
-                PlayerStateManager.state = PlayerStateManager.CurrentState.Pogp;
-            }
-            else
-            {
-                canJump = false;
-                PlayerStateManager.state = PlayerStateManager.CurrentState.Jumping;
-            }
-        }
-
-        //if you let go of jump at any point, you can't jump again
-        if(JumpUp)
-        {
-            canJump = false;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = (new Vector2(horizontalSpeed,rb.velocity.y));
-
+        rb.velocity = (new Vector2(ApplyMove.x * walkVelocity , rb.velocity.y));
         
     }
 }
