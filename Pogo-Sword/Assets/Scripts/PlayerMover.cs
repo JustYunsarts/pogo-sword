@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField]
+    private SpriteRenderer gatorSprite;
+    [SerializeField]
     private float walkVelocity;
     [SerializeField]
     private float jumpForce;
@@ -39,6 +41,7 @@ public class PlayerMover : MonoBehaviour
     {
         getMovement();
         calculateJump();
+        Flip();
     }
 
     void getMovement()
@@ -69,6 +72,18 @@ public class PlayerMover : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = (new Vector2(ApplyMove.x * walkVelocity , rb.velocity.y));
-        
+
+    }
+
+    private void Flip()
+    {
+        if(ApplyMove.x == -1)
+        {
+            gatorSprite.flipX = true;
+        }
+        if(ApplyMove.x == 1)
+        {
+            gatorSprite.flipX = false;
+        }
     }
 }

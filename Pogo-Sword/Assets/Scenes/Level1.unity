@@ -252,10 +252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31046b52582c1c47866f41ec9269798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gatorSprite: {fileID: 862348256}
   walkVelocity: 10
   jumpForce: 9
   rb: {fileID: 862348254}
-  gator_Collider: {fileID: 0}
+  gator_Collider: {fileID: 862348258}
   feetpos: {fileID: 476418080}
   feetRadius: 0.2
   groundChecker:
@@ -354,7 +355,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 8.464403, y: 13.547918}
-  m_EdgeRadius: 0.29
+  m_EdgeRadius: 0.24
 --- !u!1 &946925698
 GameObject:
   m_ObjectHideFlags: 0
