@@ -7,10 +7,9 @@ public class PlayerStateManager : MonoBehaviour
     public enum CurrentState
     {
         Idle,
+        Jumping,
         Pogo,
-        Jumping
-        
-
+        Dead
     }
 
     public static CurrentState state = CurrentState.Idle;
