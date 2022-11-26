@@ -31,6 +31,11 @@ public class PlayerPogoState : AbstractPlayerState
     }
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {
+        if (collision.CompareTag("Hazard"))
+        {
+            context.animator.SetBool("isPogo", false);
+            context.SwitchState(context.DeathState);
+        }
     }
 
     public override void OnCollisionEnter2D(PlayerStateMachine context, Collision2D collision)
@@ -41,10 +46,9 @@ public class PlayerPogoState : AbstractPlayerState
         //bounciness logic
         if (Vely < -context.pogoThreshold && repeatBounce == false)
         {
-            bounceStrength = Mathf.Clamp((-Vely * context.pogoDecay) * context.pogoStrength, 0f, context.maxVelocity);
+            bounceStrength = (-Vely * context.pogoDecay) * context.pogoStrength;
             context.RB.velocity = new Vector2(context.RB.velocity.x,bounceStrength);
 
-            Vely = 0;
             repeatBounce = true;
         }
         else if (Vely < -context.pogoThreshold && repeatBounce)

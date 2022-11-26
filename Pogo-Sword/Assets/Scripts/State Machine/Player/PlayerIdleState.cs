@@ -12,7 +12,6 @@ public class PlayerIdleState : AbstractPlayerState
     bool isGrounded;
     public override void EnterState(PlayerStateMachine context)
     {
-        
     }
     public override void UpdateState(PlayerStateMachine context)
     {
@@ -42,6 +41,10 @@ public class PlayerIdleState : AbstractPlayerState
 
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {
+        if (collision.CompareTag("Hazard"))
+        {
+            context.SwitchState(context.DeathState);
+        }
     }
 
     public override void OnCollisionEnter2D(PlayerStateMachine context, Collision2D collision)

@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    //game screen variables
+    [SerializeField]
+    private Animator _transition;
+    public Animator transition { get { return _transition; } private set { _transition = value; } }
+
     //general player variables
+    [SerializeField]
+    private GameObject gator;
     [SerializeField]
     private Animator _animator;
     public Animator animator { get { return _animator; } private set { _animator = value; } }
@@ -14,6 +21,7 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private Rigidbody2D _rb;
     public Rigidbody2D RB { get { return _rb; } private set { _rb = value; } }
+    private Vector3 respawnPoint;
 
     [SerializeField]
     private float _gravityScale;
@@ -118,6 +126,11 @@ public class PlayerStateMachine : MonoBehaviour
     //access to these monobehavior scripts.
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //because checkpoint setting applies to basically every state, I added the logic here
+        if (collision.CompareTag("Respawn"))
+        {
+            respawnPoint = collision.transform.position;
+        }
         currentState.OnTriggerEnter2D(this, collision);
     }
 
@@ -139,6 +152,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Late update for each state (used for applying movement to the player rigid body)
     private void FixedUpdate()
     {
+        RB.velocity = Vector2.ClampMagnitude(RB.velocity, maxVelocity);
         currentState.FixedUpdateState(this);
     }
 
@@ -169,5 +183,11 @@ public class PlayerStateMachine : MonoBehaviour
     {
         currentState = state;
         state.EnterState(this);
+    }
+
+    void PlayerRespawn()
+    {
+        RB.transform.position = respawnPoint;
+        SwitchState(IdleState);
     }
 }

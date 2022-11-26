@@ -29,6 +29,10 @@ public class PlayerMoveState : AbstractPlayerState
 
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {
+        if (collision.CompareTag("Hazard"))
+        {
+            context.SwitchState(context.DeathState);
+        }
     }
 
     public override void OnCollisionEnter2D(PlayerStateMachine context, Collision2D collision)
