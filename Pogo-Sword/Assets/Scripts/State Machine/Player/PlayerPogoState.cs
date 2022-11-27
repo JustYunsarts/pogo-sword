@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPogoState : AbstractPlayerState
 {
     bool repeatBounce;
+    bool isBounce = false;
     float Vely;
     float bounceStrength;
     public override void EnterState(PlayerStateMachine context)
@@ -25,9 +26,18 @@ public class PlayerPogoState : AbstractPlayerState
     }
     public override void FixedUpdateState(PlayerStateMachine context)
     {
-        context.RB.velocity = 
-            (new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y));
-
+        //if bouncing has not happened (you are falling), we apply airDI to decrease horizontal movement
+        if (isBounce == false)
+        {
+            context.RB.velocity =
+                (new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y));
+        }
+        //upon bounce, we don't apply airDI.
+        if(isBounce)
+        {
+            context.RB.velocity =
+                (new Vector2(context.horizontalMovment * context.walkSpeed, context.RB.velocity.y));
+        }
     }
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {
@@ -43,18 +53,31 @@ public class PlayerPogoState : AbstractPlayerState
         //reset gravity here to normal so that bounciness isn't hampered
         context.RB.gravityScale = context.gravityScale;
 
-        //bounciness logic
-        if (Vely < -context.pogoThreshold && repeatBounce == false)
-        {
-            bounceStrength = (-Vely * context.pogoDecay) * context.pogoStrength;
-            context.RB.velocity = new Vector2(context.RB.velocity.x,bounceStrength);
+        //We check if the collision is with the ground, as we might want to have different bounce logics with different
+        //special interactable blocks; those would be handled in their own scripts (eg. the breakable block bounce will
+        //be dealt with in the breakable blocks script).
+        //We do this so that this one pogo state isn't handling every single different variations of a bounce, which will
+        //render this state machine pointless
+        if (collision.gameObject.CompareTag("Ground")) {
+            //bounciness logic
 
-            repeatBounce = true;
-        }
-        else if (Vely < -context.pogoThreshold && repeatBounce)
-        {
-            context.RB.velocity = new Vector2(context.RB.velocity.x, (-Vely * context.pogoDecay));
+            //We add velocity here to ensure that the bounce velocity is only added once, upon collision
+            isBounce = true;
+            //We add the full bounce amount when it's your first collision with the ground
+            if (Vely < -context.pogoThreshold && repeatBounce == false)
+            {
+                bounceStrength = (-Vely * context.pogoDecay) * context.pogoStrength;
+                context.RB.velocity = new Vector2(context.RB.velocity.x, bounceStrength);
 
+                repeatBounce = true;
+            }
+            //Repeated bounces (holding shift) will otherwise give you diminishing results
+            else if (Vely < -context.pogoThreshold && repeatBounce)
+            {
+                context.RB.velocity = 
+                    new Vector2(context.RB.velocity.x, (-Vely * context.pogoDecay));
+
+            }
         }
     }
 }

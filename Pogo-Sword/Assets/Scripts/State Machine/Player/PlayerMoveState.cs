@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveState : AbstractPlayerState
 {
+    bool isGrounded;
     public override void EnterState(PlayerStateMachine context)
     {
 
@@ -19,6 +20,12 @@ public class PlayerMoveState : AbstractPlayerState
         else if (context.jumpDown)
         {
             context.SwitchState(context.JumpState);
+        }
+        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
+
+        if (!isGrounded)
+        {
+            context.SwitchState(context.FallState);
         }
     }
 

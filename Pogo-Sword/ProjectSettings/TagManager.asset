@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Intro
   - Hazard
+  - Breaking
   layers:
   - Default
   - TransparentFX

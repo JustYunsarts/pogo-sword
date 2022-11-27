@@ -104,6 +104,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     // This is the context file that every player state will refer to
     AbstractPlayerState currentState;
+    public AbstractPlayerState CurrentState { get { return currentState; } private set { currentState = value; } }
 
     public PlayerIntroState IntroState = new PlayerIntroState();
     public PlayerJumpState JumpState = new PlayerJumpState();
@@ -142,7 +143,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log(currentState);
         }
