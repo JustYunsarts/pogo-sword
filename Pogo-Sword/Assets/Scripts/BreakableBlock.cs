@@ -7,26 +7,28 @@ public class BreakableBlock : MonoBehaviour
     [SerializeField]
     private GameObject block;
     [SerializeField]
-    private GameObject player;
-    [SerializeField]
     private float _breakBounce;
     [SerializeField]
     private float _recoverTime;
-    [SerializeField]
-    private Rigidbody2D RB;
 
     private bool isBroken = false;
+    private bool shouldBreak = false;
+
     private SpriteRenderer blockSprite;
     private BoxCollider2D blockCollider;
     private float breakTime;
     private PlayerStateMachine machine;
+    private GameObject player;
+    private Rigidbody2D RB;
 
     private void Start()
     {
         blockSprite = block.GetComponent<SpriteRenderer>();
         blockCollider = block.GetComponent<BoxCollider2D>();
+        player = GameObject.FindGameObjectWithTag("Player");
         machine = player.GetComponent<PlayerStateMachine>();
-
+        RB = player.GetComponent<Rigidbody2D>();
+        
     }
 
     private void FixedUpdate()
@@ -47,12 +49,19 @@ public class BreakableBlock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && machine.CurrentState == machine.PogoState)
+        if (collision.gameObject.CompareTag("Player") && machine.CurrentState == machine.PogoState && shouldBreak)
         {
             RB.velocity = new Vector2(RB.velocity.x, _breakBounce);
             isBroken = true;
             breakTime = Time.time;
+            shouldBreak = false;
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //making sure that the block only breaks when you collide with the top plane
+        shouldBreak = true;
     }
 }
