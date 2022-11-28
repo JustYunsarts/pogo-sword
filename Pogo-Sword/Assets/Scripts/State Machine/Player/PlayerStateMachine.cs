@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -126,9 +127,19 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // the initial state of the player character
-        currentState = IntroState;
-        currentState.EnterState(this);
+        if (PlayerPrefs.GetFloat("respawnX") != 0) //logic for when respawning
+        {
+            respawnPoint = new Vector2(PlayerPrefs.GetFloat("respawnX"), PlayerPrefs.GetFloat("respawnY"));
+            RB.transform.position = respawnPoint;
+            currentState = IdleState;
+            currentState.EnterState(this);
+        }
+        else
+        {
+            // the initial state of the player character
+            currentState = IntroState;
+            currentState.EnterState(this);
+        }
     }
 
     //This script is a monobehavior, so this is for giving each state script (which derive from AbstractPlayerState) 
@@ -139,6 +150,9 @@ public class PlayerStateMachine : MonoBehaviour
         if (collision.CompareTag("Respawn"))
         {
             respawnPoint = collision.transform.position;
+            //save system for checkpoints
+            PlayerPrefs.SetFloat("respawnX", respawnPoint.x);
+            PlayerPrefs.SetFloat("respawnY", respawnPoint.y);
         }
         currentState.OnTriggerEnter2D(this, collision);
     }
@@ -196,9 +210,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void PlayerRespawn()
     {
-        RB.transform.position = respawnPoint;
-        RB.velocity = Vector2.zero;
-        SwitchState(IdleState);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
