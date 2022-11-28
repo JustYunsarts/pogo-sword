@@ -1,0 +1,270 @@
+Index: Assets/Scripts/PlayerMover.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/PlayerMover.cs b/Assets/Scripts/PlayerMover.cs
+--- a/Assets/Scripts/PlayerMover.cs	
++++ b/Assets/Scripts/PlayerMover.cs	
+@@ -1,6 +1,7 @@
+ using System;
+ using System.Collections;
+ using System.Collections.Generic;
++using Unity.VisualScripting;
+ using UnityEngine;
+ 
+ public class PlayerMover : MonoBehaviour
+Index: Assets/Scripts/PogoBehavior.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/PogoBehavior.cs b/Assets/Scripts/PogoBehavior.cs
+--- a/Assets/Scripts/PogoBehavior.cs	
++++ b/Assets/Scripts/PogoBehavior.cs	
+@@ -1,5 +1,6 @@
+ using System.Collections;
+ using System.Collections.Generic;
++using Unity.VisualScripting;
+ using UnityEngine;
+ 
+ public class PogoBehavior : MonoBehaviour
+@@ -83,5 +84,14 @@
+                 Vely = 0;
+             }
+         }
++
++        if (animator.GetBool("isPogo"))
++        {
++            if (collision.gameObject.tag == "Enemy")
++            {
++                Destroy(collision.gameObject);
++            }
++        }
+     }
++    
+ }
+Index: Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree1.png.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree1.png.meta b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree1.png.meta
+--- a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree1.png.meta	
++++ b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree1.png.meta	
+@@ -3,7 +3,7 @@
+ TextureImporter:
+   internalIDToNameTable: []
+   externalObjects: {}
+-  serializedVersion: 11
++  serializedVersion: 12
+   mipmaps:
+     mipMapMode: 0
+     enableMipMap: 0
+@@ -63,6 +63,7 @@
+   textureFormatSet: 0
+   ignorePngGamma: 0
+   applyGammaDecoding: 0
++  cookieLightType: 1
+   platformSettings:
+   - serializedVersion: 3
+     buildTarget: DefaultTexturePlatform
+Index: Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree5.png.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree5.png.meta b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree5.png.meta
+--- a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree5.png.meta	
++++ b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree5.png.meta	
+@@ -3,7 +3,7 @@
+ TextureImporter:
+   internalIDToNameTable: []
+   externalObjects: {}
+-  serializedVersion: 11
++  serializedVersion: 12
+   mipmaps:
+     mipMapMode: 0
+     enableMipMap: 0
+@@ -63,6 +63,7 @@
+   textureFormatSet: 0
+   ignorePngGamma: 0
+   applyGammaDecoding: 0
++  cookieLightType: 1
+   platformSettings:
+   - serializedVersion: 3
+     buildTarget: DefaultTexturePlatform
+Index: Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree3.png.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree3.png.meta b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree3.png.meta
+--- a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree3.png.meta	
++++ b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree3.png.meta	
+@@ -3,7 +3,7 @@
+ TextureImporter:
+   internalIDToNameTable: []
+   externalObjects: {}
+-  serializedVersion: 11
++  serializedVersion: 12
+   mipmaps:
+     mipMapMode: 0
+     enableMipMap: 0
+@@ -63,6 +63,7 @@
+   textureFormatSet: 0
+   ignorePngGamma: 0
+   applyGammaDecoding: 0
++  cookieLightType: 1
+   platformSettings:
+   - serializedVersion: 3
+     buildTarget: DefaultTexturePlatform
+Index: Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree2.png.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree2.png.meta b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree2.png.meta
+--- a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree2.png.meta	
++++ b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree2.png.meta	
+@@ -3,7 +3,7 @@
+ TextureImporter:
+   internalIDToNameTable: []
+   externalObjects: {}
+-  serializedVersion: 11
++  serializedVersion: 12
+   mipmaps:
+     mipMapMode: 0
+     enableMipMap: 0
+@@ -63,6 +63,7 @@
+   textureFormatSet: 0
+   ignorePngGamma: 0
+   applyGammaDecoding: 0
++  cookieLightType: 1
+   platformSettings:
+   - serializedVersion: 3
+     buildTarget: DefaultTexturePlatform
+Index: Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree4.png.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree4.png.meta b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree4.png.meta
+--- a/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree4.png.meta	
++++ b/Assets/Assets/Art/Sprites/Environment/Background/bgrd_tree4.png.meta	
+@@ -3,7 +3,7 @@
+ TextureImporter:
+   internalIDToNameTable: []
+   externalObjects: {}
+-  serializedVersion: 11
++  serializedVersion: 12
+   mipmaps:
+     mipMapMode: 0
+     enableMipMap: 0
+@@ -63,6 +63,7 @@
+   textureFormatSet: 0
+   ignorePngGamma: 0
+   applyGammaDecoding: 0
++  cookieLightType: 1
+   platformSettings:
+   - serializedVersion: 3
+     buildTarget: DefaultTexturePlatform
+Index: ProjectSettings/ProjectVersion.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ProjectSettings/ProjectVersion.txt b/ProjectSettings/ProjectVersion.txt
+--- a/ProjectSettings/ProjectVersion.txt	
++++ b/ProjectSettings/ProjectVersion.txt	
+@@ -1,2 +1,2 @@
+-m_EditorVersion: 2021.3.7f1
+-m_EditorVersionWithRevision: 2021.3.7f1 (24e8595d6d43)
++m_EditorVersion: 2021.3.12f1
++m_EditorVersionWithRevision: 2021.3.12f1 (8af3c3e441b1)
+Index: Packages/packages-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Packages/packages-lock.json b/Packages/packages-lock.json
+--- a/Packages/packages-lock.json	
++++ b/Packages/packages-lock.json	
+@@ -1,11 +1,11 @@
+ {
+   "dependencies": {
+     "com.unity.2d.animation": {
+-      "version": "7.0.6",
++      "version": "7.0.8",
+       "depth": 1,
+       "source": "registry",
+       "dependencies": {
+-        "com.unity.2d.common": "6.0.3",
++        "com.unity.2d.common": "6.0.5",
+         "com.unity.2d.sprite": "1.0.0",
+         "com.unity.modules.animation": "1.0.0",
+         "com.unity.modules.uielements": "1.0.0"
+@@ -13,7 +13,7 @@
+       "url": "https://packages.unity.com"
+     },
+     "com.unity.2d.common": {
+-      "version": "6.0.3",
++      "version": "6.0.5",
+       "depth": 2,
+       "source": "registry",
+       "dependencies": {
+@@ -39,12 +39,12 @@
+       "url": "https://packages.unity.com"
+     },
+     "com.unity.2d.psdimporter": {
+-      "version": "6.0.4",
++      "version": "6.0.6",
+       "depth": 1,
+       "source": "registry",
+       "dependencies": {
+-        "com.unity.2d.animation": "7.0.6",
+-        "com.unity.2d.common": "6.0.3",
++        "com.unity.2d.animation": "7.0.8",
++        "com.unity.2d.common": "6.0.5",
+         "com.unity.2d.sprite": "1.0.0"
+       },
+       "url": "https://packages.unity.com"
+@@ -56,12 +56,12 @@
+       "dependencies": {}
+     },
+     "com.unity.2d.spriteshape": {
+-      "version": "7.0.5",
++      "version": "7.0.6",
+       "depth": 1,
+       "source": "registry",
+       "dependencies": {
+         "com.unity.mathematics": "1.1.0",
+-        "com.unity.2d.common": "6.0.3",
++        "com.unity.2d.common": "6.0.4",
+         "com.unity.2d.path": "5.0.2",
+         "com.unity.modules.physics2d": "1.0.0"
+       },
+@@ -124,11 +124,11 @@
+       "depth": 0,
+       "source": "builtin",
+       "dependencies": {
+-        "com.unity.2d.animation": "7.0.6",
++        "com.unity.2d.animation": "7.0.8",
+         "com.unity.2d.pixel-perfect": "5.0.1",
+-        "com.unity.2d.psdimporter": "6.0.4",
++        "com.unity.2d.psdimporter": "6.0.6",
+         "com.unity.2d.sprite": "1.0.0",
+-        "com.unity.2d.spriteshape": "7.0.5",
++        "com.unity.2d.spriteshape": "7.0.6",
+         "com.unity.2d.tilemap": "1.0.0",
+         "com.unity.2d.tilemap.extras": "2.2.3"
+       }
+@@ -173,7 +173,7 @@
+       "url": "https://packages.unity.com"
+     },
+     "com.unity.services.core": {
+-      "version": "1.4.2",
++      "version": "1.4.3",
+       "depth": 1,
+       "source": "registry",
+       "dependencies": {
