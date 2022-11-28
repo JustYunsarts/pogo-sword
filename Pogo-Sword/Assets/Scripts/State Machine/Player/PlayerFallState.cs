@@ -31,10 +31,8 @@ public class PlayerFallState : AbstractPlayerState
     }
     public override void FixedUpdateState(PlayerStateMachine context)
     {
-
-        context.RB.velocity = 
+        context.RB.velocity =
             (new Vector2(context.horizontalMovment * context.walkSpeed, context.RB.velocity.y));
-
     }
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {

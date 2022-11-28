@@ -8,6 +8,7 @@ public class PlayerMoveState : AbstractPlayerState
     float coyoteTimeCounter;
     public override void EnterState(PlayerStateMachine context)
     {
+        context.RB.gravityScale = context.gravityScale;
         coyoteTimeCounter = 0f;
     }
     public override void UpdateState(PlayerStateMachine context)
