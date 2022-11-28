@@ -229,6 +229,7 @@ MonoBehaviour:
   _walkSpeed: 10
   _jumpForce: 15
   _jumpGravity: 4
+  _coyoteTime: 0.15
   _airDI: 0.5
   _pogoGravity: 6
   _pogoThreshold: 0.5

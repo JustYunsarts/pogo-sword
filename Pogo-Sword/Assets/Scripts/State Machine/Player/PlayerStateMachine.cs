@@ -78,6 +78,9 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _jumpGravity;
     public float jumpGravity { get { return _jumpGravity; } private set { _jumpGravity = value; } }
+    [SerializeField]
+    private float _coyoteTime;
+    public float coyoteTime { get { return _coyoteTime; } private set { _coyoteTime = value; }  }
     
     //pogo variables
     //>_airDI is how much influence the player has in horizontal movement in the air
@@ -189,6 +192,15 @@ public class PlayerStateMachine : MonoBehaviour
     void PlayerRespawn()
     {
         RB.transform.position = respawnPoint;
+        RB.velocity = Vector2.zero;
         SwitchState(IdleState);
+    }
+    //coroutine used in the movement state to enforce coyote time
+    public IEnumerator CoyoteTime()
+    {
+        yield return new WaitForSeconds(coyoteTime);
+
+        SwitchState(FallState);
+
     }
 }

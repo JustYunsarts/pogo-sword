@@ -25,7 +25,7 @@ public class PlayerMoveState : AbstractPlayerState
 
         if (!isGrounded)
         {
-            context.SwitchState(context.FallState);
+            context.StartCoroutine(context.CoyoteTime());
         }
     }
 
