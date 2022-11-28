@@ -12,6 +12,7 @@ public class PlayerIdleState : AbstractPlayerState
     bool isGrounded;
     public override void EnterState(PlayerStateMachine context)
     {
+
     }
     public override void UpdateState(PlayerStateMachine context)
     {

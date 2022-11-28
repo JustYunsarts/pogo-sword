@@ -8,6 +8,7 @@ TagManager:
   - Intro
   - Hazard
   - Breaking
+  - pogo
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,8 @@ public class PlayerStateMachine : MonoBehaviour
     //general player variables
     [SerializeField]
     private GameObject gator;
+    public GameObject Gator { get { return gator; } private set { gator = value; } }
+
     [SerializeField]
     private Animator _animator;
     public Animator animator { get { return _animator; } private set { _animator = value; } }
@@ -102,6 +104,9 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]
     private float _pogoDecay;
     public float pogoDecay { get { return _pogoDecay; } private set { _pogoDecay = value; } }
+    [SerializeField]
+    private float _wallBounce;
+    public float wallBounce { get { return _wallBounce; } private set { _wallBounce = value; } }
 
 
 
@@ -195,12 +200,5 @@ public class PlayerStateMachine : MonoBehaviour
         RB.velocity = Vector2.zero;
         SwitchState(IdleState);
     }
-    //coroutine used in the movement state to enforce coyote time
-    public IEnumerator CoyoteTime()
-    {
-        yield return new WaitForSeconds(coyoteTime);
 
-        SwitchState(FallState);
-
-    }
 }

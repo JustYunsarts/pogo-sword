@@ -5,14 +5,21 @@ using UnityEngine;
 public class PlayerPogoState : AbstractPlayerState
 {
     bool repeatBounce;
-    bool isBounce = false;
+    bool isBounce;
     float Vely;
     float bounceStrength;
+
+    bool isGrounded;
+    bool wallBouncing;
+
     public override void EnterState(PlayerStateMachine context)
     {
         context.animator.SetBool("isPogo", true);
         context.RB.gravityScale = context.pogoGravity;
         repeatBounce = false;
+        wallBouncing = false;
+        isBounce = false;
+        isGrounded = false;
     }
     public override void UpdateState(PlayerStateMachine context)
     {
@@ -23,24 +30,29 @@ public class PlayerPogoState : AbstractPlayerState
             context.animator.SetBool("isPogo", false);
             context.SwitchState(context.FallState);
         }
+
     }
     public override void FixedUpdateState(PlayerStateMachine context)
     {
-        //if bouncing has not happened (you are falling), we apply airDI to decrease horizontal movement
-        if (isBounce == false)
+        if (!wallBouncing)
         {
-            context.RB.velocity =
-                (new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y));
-        }
-        //upon bounce, we don't apply airDI.
-        if(isBounce)
-        {
-            context.RB.velocity =
-                (new Vector2(context.horizontalMovment * context.walkSpeed, context.RB.velocity.y));
+            //if bouncing has not happened (you are falling), we apply airDI to decrease horizontal movement
+            if (isBounce == false)
+            {
+                context.RB.velocity =
+                    (new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y));
+            }
+            //upon bounce, we don't apply airDI.
+            if (isBounce)
+            {
+                context.RB.velocity =
+                    (new Vector2(context.horizontalMovment * context.walkSpeed, context.RB.velocity.y));
+            }
         }
     }
     public override void OnTriggerEnter2D(PlayerStateMachine context, Collider2D collision)
     {
+
         if (collision.CompareTag("Hazard"))
         {
             context.animator.SetBool("isPogo", false);
@@ -53,16 +65,26 @@ public class PlayerPogoState : AbstractPlayerState
         //reset gravity here to normal so that bounciness isn't hampered
         context.RB.gravityScale = context.gravityScale;
 
+        //make sure that the bounce will only happen when colliding with horizontal plane
+        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
+
+        if (isGrounded)
+        {
+            isBounce = true;
+        }
+
+        if (wallBouncing)
+        {
+            wallBouncing = false;
+        }
+
         //We check if the collision is with the ground, as we might want to have different bounce logics with different
         //special interactable blocks; those would be handled in their own scripts (eg. the breakable block bounce will
         //be dealt with in the breakable blocks script).
         //We do this so that this one pogo state isn't handling every single different variations of a bounce, which will
         //render this state machine pointless
-        if (collision.gameObject.CompareTag("Ground")) {
-            //bounciness logic
-
+        if (collision.gameObject.CompareTag("Ground") && isGrounded) {
             //We add velocity here to ensure that the bounce velocity is only added once, upon collision
-            isBounce = true;
             //We add the full bounce amount when it's your first collision with the ground
             if (Vely < -context.pogoThreshold && repeatBounce == false)
             {
@@ -78,6 +100,13 @@ public class PlayerPogoState : AbstractPlayerState
                     new Vector2(context.RB.velocity.x, (-Vely * context.pogoDecay));
 
             }
+        }
+        else if (collision.gameObject.CompareTag("Ground") && isGrounded == false)
+        {
+            wallBouncing = true;
+            context.RB.velocity =
+                    new Vector2(-context.horizontalMovment * context.wallBounce, Vely);
+
         }
     }
 }

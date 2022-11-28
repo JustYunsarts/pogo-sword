@@ -5,28 +5,38 @@ using UnityEngine;
 public class PlayerMoveState : AbstractPlayerState
 {
     bool isGrounded;
+    float coyoteTimeCounter;
     public override void EnterState(PlayerStateMachine context)
     {
-
+        coyoteTimeCounter = 0f;
     }
     public override void UpdateState(PlayerStateMachine context)
     {
         context.flip();
+        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
+        if (isGrounded)
+        {
+            coyoteTimeCounter = context.coyoteTime;
+        }
+
+        if (!isGrounded)
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
 
         if (context.horizontalMovment == 0)
         {
             context.SwitchState(context.IdleState);
         }
-        else if (context.jumpDown)
+        if (context.jumpDown && coyoteTimeCounter > 0)
         {
             context.SwitchState(context.JumpState);
         }
-        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
-
-        if (!isGrounded)
+        else if (coyoteTimeCounter < 0)
         {
-            context.StartCoroutine(context.CoyoteTime());
+            context.SwitchState(context.FallState);
         }
+
     }
 
     public override void FixedUpdateState(PlayerStateMachine context)
