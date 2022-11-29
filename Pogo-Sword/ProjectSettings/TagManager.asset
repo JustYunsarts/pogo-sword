@@ -9,6 +9,7 @@ TagManager:
   - Hazard
   - Breaking
   - pogo
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3051504693
+    locked: 0
+  - name: Frontground
+    uniqueID: 1636833393
     locked: 0

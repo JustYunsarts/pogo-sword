@@ -82,6 +82,16 @@ public class PogoBehavior : MonoBehaviour
 
                 Vely = 0;
             }
+            
         }
+        
+        if (animator.GetBool("isPogo"))
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+        
     }
 }
