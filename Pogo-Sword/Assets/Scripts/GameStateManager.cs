@@ -7,24 +7,13 @@ public class GameStateManager : MonoBehaviour
 {
     public enum CurrentState
     {
-        Start,
-        Key,
-        Win
+        Play,
+        Win,
+
 
     }
 
-    public static CurrentState state = CurrentState.Start;
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (state == CurrentState.Win)
-            {
-            state = CurrentState.Start;
-            AdvanceStage();
-        }
-    }
-
+    public static CurrentState state = CurrentState.Play;
     public void AdvanceStage()
     {
         if(SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCountInBuildSettings-1)

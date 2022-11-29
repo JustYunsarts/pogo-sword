@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 3179725149838875681}
-  _breakBounce: 30
+  _breakBounce: 34
   _recoverTime: 5
 --- !u!70 &3179725149838875682
 CapsuleCollider2D:

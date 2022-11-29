@@ -40,7 +40,7 @@ public class PlayerPogoState : AbstractPlayerState
             if (isBounce == false)
             {
                 context.RB.velocity =
-                    (new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y));
+                    Vector2.ClampMagnitude(new Vector2(context.horizontalMovment * context.walkSpeed * context.airDI, context.RB.velocity.y), context.maxVelocity);
             }
             //upon bounce, we don't apply airDI.
             if (isBounce)

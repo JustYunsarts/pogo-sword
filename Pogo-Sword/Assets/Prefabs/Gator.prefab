@@ -249,7 +249,7 @@ MonoBehaviour:
   _animator: {fileID: 2692181911799943760}
   player: {fileID: 2692181911799943762}
   _rb: {fileID: 2692181911799943789}
-  _gravityScale: 5
+  _gravityScale: 6
   _maxVelocity: 100
   _introSpeed: 15
   _introFall: 150
@@ -260,7 +260,7 @@ MonoBehaviour:
   _feetPos: {fileID: 2692181912219459987}
   _walkSpeed: 10
   _jumpForce: 15
-  _jumpGravity: 4
+  _jumpGravity: 5
   _coyoteTime: 0.15
   _airDI: 0.5
   _pogoGravity: 6
