@@ -213,4 +213,10 @@ public class PlayerStateMachine : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetFloat("respawnX", 0);
+        PlayerPrefs.SetFloat("respawnY", 0);
+    }
+
 }

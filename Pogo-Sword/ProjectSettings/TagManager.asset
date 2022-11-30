@@ -10,6 +10,9 @@ TagManager:
   - Breaking
   - pogo
   - Enemy
+  - Manager
+  - Fade
+  - Despawn
   layers:
   - Default
   - TransparentFX

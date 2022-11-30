@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2692181911799943788}
   - component: {fileID: 2692181911799943767}
   - component: {fileID: 2692181911799943766}
+  - component: {fileID: -4815153915414430951}
   m_Layer: 7
   m_Name: Gator
   m_TagString: Player
@@ -269,6 +270,28 @@ MonoBehaviour:
   _pogoStrength: 4
   _pogoDecay: 0.24
   _wallBounce: 1.5
+--- !u!68 &-4815153915414430951
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692181911799943791}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.81}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.4724325, y: 0.010428429}
+  - {x: 0.5245751, y: -0.010428429}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &2692181912219460012
 GameObject:
   m_ObjectHideFlags: 0

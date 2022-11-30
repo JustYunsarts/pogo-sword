@@ -14,6 +14,8 @@ public class GameStateManager : MonoBehaviour
     }
 
     public static CurrentState state = CurrentState.Play;
+
+
     public void AdvanceStage()
     {
         if(SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCountInBuildSettings-1)
@@ -30,4 +32,5 @@ public class GameStateManager : MonoBehaviour
     {
         Application.Quit();
     }
+
 }

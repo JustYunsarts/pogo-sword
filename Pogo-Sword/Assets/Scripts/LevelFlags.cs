@@ -17,15 +17,26 @@ public class LevelFlags : MonoBehaviour
     private string label;
 
     [SerializeField]
-    private int sceneNumber;
+    private string LevelName;
 
     bool isCollided = false;
+
+    Animator fadeAnim;
+    GameObject manager;
+
+
+    private void Awake()
+    {
+        fadeAnim = GameObject.FindGameObjectWithTag("Fade").GetComponent<Animator>();
+        manager = GameObject.FindGameObjectWithTag("Manager");
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isCollided)
         {
-            SceneManager.LoadScene(sceneNumber);
+            fadeAnim.SetTrigger("fadeOut");
+            SceneManager.LoadSceneAsync(LevelName);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

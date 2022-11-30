@@ -24,7 +24,7 @@ public class WinMenu : MonoBehaviour
             winMenu.SetActive(true);
             isActive = true;
         }
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space) && isActive)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && isActive)
         {
             winMenu.SetActive(false);
             isActive = false;

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Rohlevel1.unity
     guid: f099a5fd51f683444a714f7a4ff5a593
+  - enabled: 1
+    path: Assets/Scenes/Rohlevel2.unity
+    guid: b761adc4704a9544abc5e6b6129014e7
   m_configObjects: {}
