@@ -9,7 +9,6 @@ public class PlayerPogoState : AbstractPlayerState
     float Vely;
     float bounceStrength;
 
-    bool isGrounded;
     bool wallBouncing;
 
     public override void EnterState(PlayerStateMachine context)
@@ -19,7 +18,6 @@ public class PlayerPogoState : AbstractPlayerState
         repeatBounce = false;
         wallBouncing = false;
         isBounce = false;
-        isGrounded = false;
     }
     public override void UpdateState(PlayerStateMachine context)
     {
@@ -66,9 +64,8 @@ public class PlayerPogoState : AbstractPlayerState
         context.RB.gravityScale = context.gravityScale;
 
         //make sure that the bounce will only happen when colliding with horizontal plane
-        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
 
-        if (isGrounded)
+        if (context.IsGrounded())
         {
             isBounce = true;
         }
@@ -83,7 +80,7 @@ public class PlayerPogoState : AbstractPlayerState
         //be dealt with in the breakable blocks script).
         //We do this so that this one pogo state isn't handling every single different variations of a bounce, which will
         //render this state machine pointless
-        if (collision.gameObject.CompareTag("Ground") && isGrounded) {
+        if (collision.gameObject.CompareTag("Ground") && context.IsGrounded()) {
             //We add velocity here to ensure that the bounce velocity is only added once, upon collision
             //We add the full bounce amount when it's your first collision with the ground
             if (Vely < -context.pogoThreshold && repeatBounce == false)
@@ -101,7 +98,7 @@ public class PlayerPogoState : AbstractPlayerState
 
             }
         }
-        else if (collision.gameObject.CompareTag("Ground") && isGrounded == false)
+        else if (collision.gameObject.CompareTag("Ground") && context.IsGrounded() == false)
         {
             wallBouncing = true;
             context.RB.velocity =

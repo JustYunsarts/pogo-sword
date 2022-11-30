@@ -54,9 +54,14 @@ public class PlayerStateMachine : MonoBehaviour
     public float feetRadius { get { return _feetRadius; } private set { _feetRadius = value; } }
 
     [SerializeField]
-    private Transform _feetPos; //used for checking if we need to switch to the fallstate from idle
+    private Transform _rightFoot; //used for checking if we need to switch to the fallstate from idle
     //if you walk off a platform, feetpos will not be in contact w/ the ground so we switch states
-    public Transform feetPos { get { return _feetPos; } private set { _feetPos = value; } }
+    public Transform rightFoot { get { return _rightFoot; } private set { _rightFoot = value; } }
+
+    [SerializeField]
+    private Transform _leftFoot; //used for checking if we need to switch to the fallstate from idle
+    //if you walk off a platform, feetpos will not be in contact w/ the ground so we switch states
+    public Transform leftFoot { get { return _leftFoot; } private set { _leftFoot = value; } }
 
     //movement variables 
     private Vector2 _horizontalMovement;
@@ -217,6 +222,20 @@ public class PlayerStateMachine : MonoBehaviour
     {
         PlayerPrefs.SetFloat("respawnX", 0);
         PlayerPrefs.SetFloat("respawnY", 0);
+    }
+
+    public bool IsGrounded()
+    {
+        //true if either the right or left foot is nearby a ground plane
+        if (Physics2D.OverlapCircle(rightFoot.position, feetRadius, groundChecker) || Physics2D.OverlapCircle(leftFoot.position, feetRadius, groundChecker))
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 
 }

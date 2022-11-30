@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMoveState : AbstractPlayerState
 {
-    bool isGrounded;
     float coyoteTimeCounter;
     public override void EnterState(PlayerStateMachine context)
     {
@@ -14,13 +13,12 @@ public class PlayerMoveState : AbstractPlayerState
     public override void UpdateState(PlayerStateMachine context)
     {
         context.flip();
-        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
-        if (isGrounded)
+        if (context.IsGrounded())
         {
             coyoteTimeCounter = context.coyoteTime;
         }
 
-        if (!isGrounded)
+        if (!context.IsGrounded())
         {
             coyoteTimeCounter -= Time.deltaTime;
         }

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFallState : AbstractPlayerState
-{
-    bool isGrounded;
-    public override void EnterState(PlayerStateMachine context)
+{    public override void EnterState(PlayerStateMachine context)
     {
         //Set falling gravity to normal to counteract the change in gravity while jumping, to avoid
         //the physics from feeling floaty
@@ -16,9 +14,9 @@ public class PlayerFallState : AbstractPlayerState
         context.flip();
 
         //Draw a circle around the player's feet. If in contact with the ground layer, switch to idle state
-        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
+        //isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
 
-        if (isGrounded)
+        if (context.IsGrounded())
         {
             context.SwitchState(context.IdleState);
         }

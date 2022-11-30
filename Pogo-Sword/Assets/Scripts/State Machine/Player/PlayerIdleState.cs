@@ -8,8 +8,6 @@ public class PlayerIdleState : AbstractPlayerState
     //if you detect any movement, then move to the appropriate state:
     //Moving state for A and D
     //Jumping State for SPACE
-
-    bool isGrounded;
     public override void EnterState(PlayerStateMachine context)
     {
 
@@ -26,9 +24,8 @@ public class PlayerIdleState : AbstractPlayerState
             context.SwitchState(context.JumpState);
         }
 
-        isGrounded = Physics2D.OverlapCircle(context.feetPos.position, context.feetRadius, context.groundChecker);
 
-        if (!isGrounded)
+        if (!context.IsGrounded())
         {
             context.SwitchState(context.FallState);
         }
