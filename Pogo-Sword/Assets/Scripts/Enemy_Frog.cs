@@ -21,7 +21,7 @@ public class Enemy_Frog : MonoBehaviour
         Anim = GetComponent<Animator>();
         Coll = GetComponent<Collider2D>();
         
-        transform.DetachChildren();
+        //transform.DetachChildren();
         leftx = leftpoint.position.x;
         rightx = rightpoint.position.x;
         Destroy(leftpoint.gameObject);
