@@ -13,9 +13,6 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy_Frog.cs" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -49,7 +46,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity Hub\2021.3.12f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2021.3.11f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\lyc20\OneDrive\文档\GitHub\pogo-sword\Pogo-Sword -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\lyc20\OneDrive\文档\GitHub\pogo-sword\Pogo-Sword" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -96,6 +93,8 @@
       <workItem from="1669702918749" duration="7000" />
       <workItem from="1669703120067" duration="595000" />
       <workItem from="1669704551185" duration="598000" />
+      <workItem from="1669844227256" duration="458000" />
+      <workItem from="1669844993690" duration="879000" />
     </task>
     <servers />
   </component>
